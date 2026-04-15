@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider car)
     {
-        rb.isKinematic = false;
-        cam.enabled = false;
+        //rb.isKinematic = false;
+        //cam.enabled = false;
     }
 }
