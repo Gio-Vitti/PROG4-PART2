@@ -64,11 +64,18 @@ public class PlayerController : MonoBehaviour
         {
             body.eulerAngles = new Vector3(0, transform.eulerAngles.y, -30);
         }
+
+        //if (Physics.BoxCast(transform.position, Vector3.one, Vector3.zero) == )
+       // {
+
+        //}
     }
 
-    private void OnTriggerEnter(Collider car)
+    private void OnTriggerEnter(Collider other)
     {
-        //rb.isKinematic = false;
-        //cam.enabled = false;
+        if (other.CompareTag("Car")) {
+            rb.freezeRotation = false;
+            cam.enabled = false;
+        }
     }
 }
