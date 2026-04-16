@@ -13,8 +13,11 @@ namespace NodeCanvas.Tasks.Actions {
 
 		//private NavMeshAgent navAgent;
 		public float speed = 30f;
+		public float duration;
 		public MeshRenderer dangerZone;
-		Vector3 destination;
+
+		private Vector3 destination;
+		private Vector3 startPos;
 		private Rigidbody rb;
 
 		//Use for initialization. This is called only once in the lifetime of the task.
@@ -29,9 +32,9 @@ namespace NodeCanvas.Tasks.Actions {
 		//EndAction can be called from anywhere.
 		protected override void OnExecute()
 		{
+			startPos = agent.transform.position;
 			rb = agent.GetComponent<Rigidbody>();
 			destination = agent.transform.forward.normalized;
-			
 			StartCoroutine(EndTask());
 
 		}
@@ -39,26 +42,16 @@ namespace NodeCanvas.Tasks.Actions {
 		//Called once per frame while the action is active.
 		protected override void OnUpdate()
 		{
+			//Charge forward
 			rb.linearVelocity = destination * speed;
-
+	
 		}
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Wall"))
-            {
-                agent.transform.position = new Vector3(-17, 0.22f, 20);
-                EndAction(true);
-            }
-        }
 
         private IEnumerator EndTask()
-		{
-			yield return new WaitForSeconds(3);
-			rb.linearVelocity = Vector3.zero;
-			EndAction(true);
-		}
-
-        
+        {
+            yield return new WaitForSeconds(5);
+            EndAction(true);
+        }
 
         //Called when the task is disabled.
         protected override void OnStop()
