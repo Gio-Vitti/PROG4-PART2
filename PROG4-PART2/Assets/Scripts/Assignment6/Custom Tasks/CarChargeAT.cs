@@ -12,7 +12,7 @@ namespace NodeCanvas.Tasks.Actions {
 	{
 
 		//private NavMeshAgent navAgent;
-		public float speed = 30f;
+		public BBParameter<float> speedBB;
 		public float duration;
 		public MeshRenderer dangerZone;
 
@@ -43,7 +43,7 @@ namespace NodeCanvas.Tasks.Actions {
 		protected override void OnUpdate()
 		{
 			//Charge forward
-			rb.linearVelocity = destination * speed;
+			rb.linearVelocity = destination * speedBB.value;
 	
 		}
 

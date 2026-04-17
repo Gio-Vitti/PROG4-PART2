@@ -3,7 +3,9 @@ using System.Collections;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +19,11 @@ public class PlayerController : MonoBehaviour
     public CinemachineCamera cam;
 
     private Rigidbody rb;
+
+    public Image Heart1;
+    public Image Heart2;
+    public Image Heart3;
+    private int hp = 3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -64,18 +71,19 @@ public class PlayerController : MonoBehaviour
         {
             body.eulerAngles = new Vector3(0, transform.eulerAngles.y, -30);
         }
-
-        //if (Physics.BoxCast(transform.position, Vector3.one, Vector3.zero) == )
-       // {
-
-        //}
+     
     }
 
+    //Enemy collisions
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Car")) {
-            rb.freezeRotation = false;
-            cam.enabled = false;
+        if (other.CompareTag("Bear")) {
+            transform.position = new Vector3(0, transform.position.y, -15);
+        }
+
+        if (other.CompareTag("Car"))
+        {
+            transform.position = new Vector3(0, transform.position.y, -15);
         }
     }
 }
